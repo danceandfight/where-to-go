@@ -11,9 +11,8 @@ class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
     def image_preview(self, obj):
         return format_html(
-            '<img src="{url}" width="{width}" height={height} />',
+            '<img src="{url}" height={height} />',
             url=obj.image.url,
-            width='auto',
             height='200',
             )
 
