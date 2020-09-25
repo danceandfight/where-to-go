@@ -5,6 +5,7 @@ from adminsortable2.admin import SortableInlineAdminMixin
 
 import traceback
 
+
 class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = PlaceImage
     readonly_fields = ['image_preview']
@@ -16,8 +17,8 @@ class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
             height='200',
             )
 
+    fields = ['image', 'image_preview']
 
-    fields = ('image', 'image_preview')
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
@@ -29,5 +30,6 @@ class PlaceAdmin(admin.ModelAdmin):
         print(traceback.format_exc())
 
     search_fields = ['title']
+
 
 admin.site.register(PlaceImage)
