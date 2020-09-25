@@ -3,8 +3,6 @@ from django.utils.html import format_html
 from .models import Place, PlaceImage
 from adminsortable2.admin import SortableInlineAdminMixin
 
-import traceback
-
 
 class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = PlaceImage
@@ -22,12 +20,10 @@ class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
-    try:
-        inlines = [
-            PlaceImageInline,
-        ]
-    except Exception:
-        print(traceback.format_exc())
+
+    inlines = [
+        PlaceImageInline,
+    ]
 
     search_fields = ['title']
 
