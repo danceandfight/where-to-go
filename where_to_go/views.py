@@ -3,29 +3,10 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from places.models import Place
 
-"""
+
 def serialize_place(place):
 
     return {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [place.lng, place.lat]
-            },
-            "properties": {
-                "title": place.title,
-                "placeId": place.id,
-                "detailsUrl": reverse('show_place_page', args=[place.id])
-            }
-        }
-"""
-
-def show_main_page(request):
-
-    places = Place.objects.all()
-    places_content = []
-    for place in places:
-        content = {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -37,8 +18,13 @@ def show_main_page(request):
                 "detailsUrl": reverse('show_place_page', args=[place.pk])
             }
         }
-        places_content.append(content)
-    #places_content = [serialize_place(place) for place in places]
+
+
+def show_main_page(request):
+
+    places = Place.objects.all()
+
+    places_content = [serialize_place(place) for place in places]
     places_geojson = {
         'type': 'FeatureCollection',
         'features': places_content,
