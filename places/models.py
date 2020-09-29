@@ -22,7 +22,7 @@ class PlaceImage(models.Model):
         verbose_name='Место',
         related_name='images',
         on_delete=models.CASCADE)
-    image = models.ImageField(verbose_name='Фотография')
+    image = models.ImageField(verbose_name='Фотография', upload_to='media')
     number = models.PositiveIntegerField(
         verbose_name='Номер',
         default=0,
