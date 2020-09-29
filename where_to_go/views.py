@@ -36,7 +36,7 @@ def show_place_page(request, place_id):
 
     place = get_object_or_404(Place, pk=place_id)
     images = place.images.all()
-    place_json = {
+    serialized_place = {
         "title": place.title,
         "imgs": [image.image.url for image in images],
         "description_short": place.description_short,
@@ -47,6 +47,6 @@ def show_place_page(request, place_id):
         }
     }
     return JsonResponse(
-        place_json,
+        serialized_place,
         json_dumps_params={'indent': 2, 'ensure_ascii': False},
         safe=False)
