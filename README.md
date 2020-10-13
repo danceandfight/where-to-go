@@ -21,7 +21,8 @@
 ```python
 pip install -r requirements.txt
 ```
-3. Примените миграции к сайту командой: ```python
+3. Примените миграции к сайту командой: 
+```python
 python manage.py migrate
 ```
 4. Запустите сайт командой: 
