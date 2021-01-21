@@ -15,14 +15,17 @@ class Command(BaseCommand):
 
         url = options['url']
         response = requests.get(url)
-        place_json = response.json()
+        response.raise_for_status()
+        decoded_response = response.json()
+        if 'error' in decoded_response:
+            raise requests.exceptions.HTTPError(decoded_response['error'])
         place, create = Place.objects.get_or_create(
-            title=place_json['title'],
-            description_short=place_json['description_short'],
-            description_long=place_json['description_long'],
-            lng=place_json['coordinates']['lng'],
-            lat=place_json['coordinates']['lat'])
-        image_urls = place_json['imgs']
+            title=decoded_response['title'],
+            description_short=decoded_response['description_short'],
+            description_long=decoded_response['description_long'],
+            lng=decoded_response['coordinates']['lng'],
+            lat=decoded_response['coordinates']['lat'])
+        image_urls = decoded_response['imgs']
 
         for number, image_url in enumerate(image_urls, 1):
             response = requests.get(image_url)
