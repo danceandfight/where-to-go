@@ -29,6 +29,7 @@ class PlaceImage(models.Model):
     number = models.PositiveIntegerField(
         verbose_name='Номер',
         default=0,
+        db_index=True,
         blank=True,
         )
 
