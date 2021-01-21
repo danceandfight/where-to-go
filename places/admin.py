@@ -4,6 +4,10 @@ from .models import Place, PlaceImage
 from adminsortable2.admin import SortableInlineAdminMixin
 
 
+class PlaceImageAdmin(admin.ModelAdmin):
+    raw_id_fields = ['place']
+
+
 class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = PlaceImage
     readonly_fields = ['image_preview']
@@ -27,5 +31,4 @@ class PlaceAdmin(admin.ModelAdmin):
 
     search_fields = ['title']
 
-
-admin.site.register(PlaceImage)
+admin.site.register(PlaceImage, PlaceImageAdmin)
