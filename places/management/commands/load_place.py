@@ -21,10 +21,11 @@ class Command(BaseCommand):
             raise requests.exceptions.HTTPError(decoded_response['error'])
         place, create = Place.objects.get_or_create(
             title=decoded_response['title'],
-            description_short=decoded_response['description_short'],
-            description_long=decoded_response['description_long'],
-            lng=decoded_response['coordinates']['lng'],
-            lat=decoded_response['coordinates']['lat'])
+            defaults={
+                "description_short": decoded_response['description_short'],
+                "description_long": decoded_response['description_long'],
+                "lng": decoded_response['coordinates']['lng'],
+                "lat": decoded_response['coordinates']['lat']})
         image_urls = decoded_response['imgs']
 
         for number, image_url in enumerate(image_urls, 1):
