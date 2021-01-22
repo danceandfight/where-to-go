@@ -35,5 +35,8 @@ class Command(BaseCommand):
             placeimage, create = PlaceImage.objects.get_or_create(
                 place=place,
                 number=number)
-            img_byte = BytesIO(response.content)
-            placeimage.image.save(image_name, files.File(img_byte), save=True)
+            byte_response = BytesIO(response.content)
+            placeimage.image.save(
+                image_name,
+                files.File(byte_response),
+                save=True)
