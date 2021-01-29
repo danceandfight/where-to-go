@@ -22,8 +22,8 @@ class Command(BaseCommand):
         place, create = Place.objects.get_or_create(
             title=decoded_response['title'],
             defaults={
-                "description_short": decoded_response['description_short'],
-                "description_long": decoded_response['description_long'],
+                "short_description": decoded_response['description_short'],
+                "long_description": decoded_response['description_long'],
                 "lng": decoded_response['coordinates']['lng'],
                 "lat": decoded_response['coordinates']['lat']})
         image_urls = decoded_response['imgs']
