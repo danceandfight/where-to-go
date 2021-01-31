@@ -30,7 +30,6 @@ class PlaceImage(models.Model):
         verbose_name='Номер',
         default=0,
         db_index=True,
-        blank=True,
         )
 
     class Meta(object):
